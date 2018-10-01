@@ -13,7 +13,7 @@ public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long training_id;
+    private long id;
 
     private String name;
 
@@ -22,7 +22,7 @@ public class Training {
     private String type;
 
     public long getId() {
-        return training_id;
+        return id;
     }
 
     public String getName() {
