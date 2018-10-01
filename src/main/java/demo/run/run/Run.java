@@ -20,12 +20,15 @@ public class Run {
 
     private double distance;
 
-    private double time;
+    private Double time;
 
-    private int score;
-    private double avspeed;
+    private Integer score;
+    private Double avspeed;
 
     private String overdue;
+
+    private String finished;
+
 
     private String comment;
 
@@ -60,7 +63,7 @@ public class Run {
         this.date = date;
     }
 
-    public double getTime() {
+    public Double getTime() {
         return time;
     }
 
@@ -76,7 +79,7 @@ public class Run {
         this.distance = distance;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
@@ -84,11 +87,11 @@ public class Run {
         this.score = score;
     }
 
-    public double getAvspeed() {
+    public Double getAvspeed() {
         return avspeed;
     }
 
-    public void setAvspeed(double avspeed) {
+    public void setAvspeed(Double avspeed) {
         this.avspeed = avspeed;
     }
 
@@ -98,5 +101,14 @@ public class Run {
 
     public void setOverdue(String overdue) {
         this.overdue = overdue;
+    }
+
+
+    public String getFinished() {
+        return finished;
+    }
+
+    public void setFinished(String finished) {
+        this.finished = finished;
     }
 }
