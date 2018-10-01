@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HELLO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p> ADD A Training NOW</p>
+<form>
+    Name:<br>
+    <input type="text" name="name" id="new_name">
+    <br>
+    Description:<br>
+    <input type="description" name="description" id="new_description" >
+    <br>
+    Type:<br>
+    <input type="text" name="type" id="new_type">
+    <br><br>
+    <div onclick="add_training()">ADD TRAINING!</div>
+</form>
+<hr>
+<p> DELETE TRAINING NOW</p>
+<form>
+    ID:<br>
+    <input type="text" name="" id="delete_id">
+    <br>
+
+    <div >DELETE!</div>
+</form>
+
+<div onclick="get_trainings()">show all trainings</div>
+<div id="list">
+
+</div>
+<script>
+    ;
+
+    function add_training(){
+        var xhttp = new XMLHttpRequest()
+        var data_obj = {
+            name:document.getElementById("new_name").value,
+            description:document.getElementById("new_description").value,
+            type:document.getElementById("new_type").value
+        }
+        var data = JSON.stringify(data_obj);
+        var url = "/api/training/add";
+
+        xhttp.open('POST', url, true);
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.onload = function () {
+
+            console.log(data);
+        };
+        xhttp.send(data);
+
+
+    }
+
+    function delete_student() {
+        var xhttp = new XMLHttpRequest()
+        var url = "/students/delete/"+document.getElementById("delete_id").value;
+        xhttp.open("DELETE", url, true);
+        xhttp.onload = function () {
+            console.log("deleting");
+        }
+        xhttp.send();
+
+
+    }
+
+    function get_trainings() {
+        var xhttp = new XMLHttpRequest()
+        var url="/api/training";
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+
+                document.getElementById("list").innerHTML = xhttp.responseText;
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+
+    }
+</script>
+</body>
+</html>

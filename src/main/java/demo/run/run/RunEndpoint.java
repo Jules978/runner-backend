@@ -3,13 +3,12 @@ package demo.run.run;
 import demo.run.run.Run;
 import demo.run.run.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.awt.*;
 
 @RestController
@@ -30,5 +29,17 @@ public class RunEndpoint {
     public Run findRunById(@PathVariable long id) {
         Run run = this.runService.findById(id);
         return run;
+    }
+
+    @PostMapping("/api/run/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response postStudent(@RequestBody Run run){
+        if(run != null){
+            Run result = this.runService.save(run);
+            return Response.accepted(result.getId()).build();
+        }
+        System.out.println("Run in POST is null!");
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 }
