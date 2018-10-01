@@ -29,6 +29,17 @@ public class Run {
 
     private String comment;
 
+    @ManyToOne
+    private Training training;
+
+    public Training getTraining() {
+        return training;
+    }
+
+    public void setTraining(Training training) {
+        this.training = training;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -39,10 +50,6 @@ public class Run {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public Date getDate() {
