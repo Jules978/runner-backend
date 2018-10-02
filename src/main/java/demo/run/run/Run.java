@@ -111,4 +111,12 @@ public class Run {
     public void setFinished(String finished) {
         this.finished = finished;
     }
+
+    public boolean checkTimeAndDistance(){
+        if (this.time != null && this.distance > 0.0){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
