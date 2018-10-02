@@ -31,6 +31,11 @@ public class RunEndpoint {
         return runs;
     }
 
+    @GetMapping("/api/run/unfinished")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Run> showUnfinished() {
+       return this.runService.giveUnfinished();
+    }
 
     @GetMapping("/api/runs/overdue")
     @Produces(MediaType.APPLICATION_JSON)

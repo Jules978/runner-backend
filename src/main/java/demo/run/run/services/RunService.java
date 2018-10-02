@@ -33,6 +33,17 @@ public class RunService {
         return runs;
     }
 
+    public List<Run> giveUnfinished(){
+        List<Run> runs = this.runRepository.findAllUnfinishedRuns();
+        Collections.sort(runs, new Comparator<Run>() {
+            @Override
+            public int compare(Run o1, Run o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+        return runs;
+    }
+
     public Run findById(long id){
         return this.runRepository.findById(id).orElse(null);
     }
