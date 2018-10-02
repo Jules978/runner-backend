@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -15,7 +14,23 @@ public class RunService {
     RunRepository runRepository;
 
     public Iterable<Run> giveAll(){
-        return runRepository.findAll();
+        return this.runRepository.findAll();
+
+    }
+
+    public List<Run> giveAllSorted(){
+        Iterable<Run> tempRun = this.runRepository.findAll();
+        List<Run> runs = new ArrayList<>();
+        for (Run r: tempRun){
+            runs.add(r);
+        }
+        Collections.sort(runs, new Comparator<Run>() {
+            @Override
+            public int compare(Run o1, Run o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+        return runs;
     }
 
     public Run findById(long id){

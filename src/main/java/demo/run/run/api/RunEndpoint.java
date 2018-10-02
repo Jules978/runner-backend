@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:4200"})
@@ -22,6 +23,14 @@ public class RunEndpoint {
         Iterable<Run> runs = this.runService.giveAll();
         return runs;
     }
+
+    @GetMapping("/api/run/sortbydate")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Run> showAllSorted() {
+        List<Run> runs = this.runService.giveAllSorted();
+        return runs;
+    }
+
 
     @GetMapping("/api/runs/overdue")
     @Produces(MediaType.APPLICATION_JSON)
