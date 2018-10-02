@@ -1,10 +1,6 @@
-package demo.run.run;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.lang.Nullable;
+package demo.run.run.classes;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity

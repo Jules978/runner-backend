@@ -1,11 +1,9 @@
-package demo.run.run;
-import demo.run.run.RunRepository;
+package demo.run.run.services;
+import demo.run.run.classes.Run;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.Null;
-import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

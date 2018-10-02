@@ -1,16 +1,14 @@
-package demo.run.run;
+package demo.run.run.api;
 
-import demo.run.run.Run;
-import demo.run.run.RunService;
+import demo.run.run.classes.Run;
+import demo.run.run.services.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
-import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.*;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8080", "http://localhost:4200"})

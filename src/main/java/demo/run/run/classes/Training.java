@@ -1,4 +1,4 @@
-package demo.run.run;
+package demo.run.run.classes;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.lang.Nullable;
