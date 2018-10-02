@@ -1,11 +1,6 @@
-package demo.run.run.classes;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.lang.Nullable;
+package demo.run.run.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 @Table(name="trainings")

@@ -1,5 +1,5 @@
 package demo.run.run.services;
-import demo.run.run.classes.Run;
+import demo.run.run.entities.Run;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

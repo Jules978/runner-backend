@@ -1,6 +1,6 @@
 package demo.run.run.services;
 
-import demo.run.run.classes.Training;
+import demo.run.run.entities.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package demo.run.run.classes;
+package demo.run.run.entities;
 
 import javax.persistence.*;
 import java.util.Date;

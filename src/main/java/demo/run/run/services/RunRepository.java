@@ -1,5 +1,5 @@
 package demo.run.run.services;
-import demo.run.run.classes.Run;
+import demo.run.run.entities.Run;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

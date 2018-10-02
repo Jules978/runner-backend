@@ -1,5 +1,4 @@
-package demo.run.run.classes;
-import demo.run.run.services.RunService;
+package demo.run.run.services;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
