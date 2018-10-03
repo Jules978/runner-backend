@@ -17,19 +17,19 @@ public class TrainingService {
     @Autowired
     RunService runservice;
 
-    public Iterable<Training> giveAll(){
+    public Iterable<Training> giveAll() {
         return trainingRepository.findAll();
     }
 
-    public Training findById(long id){
+    public Training findById(long id) {
         return this.trainingRepository.findById(id).orElse(null);
     }
 
-    public Training save (Training training) {
+    public Training save(Training training) {
         return trainingRepository.save(training);
     }
 
-    public void deletebyId(long id) {
+    public void deleteById(long id) {
         if (trainingRepository.existsById(id)) {
             List<Run> runs = this.runservice.FindByTraining(id);
             for (Run r : runs) {
@@ -39,14 +39,12 @@ public class TrainingService {
         }
     }
 
-    public void update(long id, Training trainingNew){
-        if(trainingRepository.existsById(id)) {
-
+    public void update(long id, Training trainingNew) {
+        if (trainingRepository.existsById(id)) {
             Training trainingEdit = this.findById(id);
             trainingEdit.setName(trainingNew.getName());
             trainingEdit.setDescription(trainingNew.getDescription());
             trainingEdit.setType(trainingNew.getType());
-
             this.save(trainingEdit);
         }
     }

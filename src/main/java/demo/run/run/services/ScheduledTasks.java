@@ -12,7 +12,6 @@ public class ScheduledTasks {
 
     @Scheduled(cron = "0 1 1 * * ?" , zone="Europe/Amsterdam")
     public void updateOverdue(){
-
         this.runService.updateOverdue();
     }
 }

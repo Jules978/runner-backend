@@ -78,7 +78,6 @@ public class RunEndpoint {
         if(this.runService.existsById(id)) {
             this.runService.finishRun(id, runNew);
         }
-
     }
 
     @PutMapping("/api/run/updatefinished/{id}")
@@ -86,7 +85,6 @@ public class RunEndpoint {
     public void updateFinishedRun(@PathVariable long id, @RequestBody Run runNew) {
         if (this.runService.existsById(id)) {
             //TODO
-
         }
     }
 

@@ -16,7 +16,6 @@ public class RunService {
 
     public Iterable<Run> giveAll(){
         return this.runRepository.findAll();
-
     }
 
     public List<Run> giveAllSorted(){
@@ -64,18 +63,14 @@ public class RunService {
     public void updateUnfinishedRun(long id, Run runNew){
         Run runEdit = this.findById(id);
         runEdit.setDistance(runNew.getDistance());
-
         runEdit.setComment(runNew.getComment());
         runEdit.setTraining(runNew.getTraining());
-
         this.save(runEdit);
-
     }
 
     public void finishRun(long id, Run runNew){
         Run runEdit = this.findById(id);
         runEdit.setDistance(runNew.getDistance());
-
         if(runNew.checkTimeAndDistance()) {
             runEdit.setTime(runNew.getTime());
             double pace = runNew.getTime() / runNew.getDistance();
@@ -84,9 +79,7 @@ public class RunService {
         runEdit.setComment(runNew.getComment());
         runEdit.setFinished("yes");
         runEdit.setScore(runNew.getScore());
-
         this.save(runEdit);
-
     }
 
     public void updateOverdue(){

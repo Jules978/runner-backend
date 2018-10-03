@@ -10,24 +10,15 @@ public class Run {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Temporal(TemporalType.DATE)
     Date date;
-
     private double distance;
-
     private Double time;
-
     private Integer score;
     private Double avspeed;
-
     private String overdue;
-
     private String finished;
-
-
     private String comment;
-
     @ManyToOne
     private Training training;
 

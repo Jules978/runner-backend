@@ -65,7 +65,6 @@ public class TrainingEndpoint {
 
     @DeleteMapping("/api/training/delete/{id}")
     public void deleteTraining(@PathVariable long id) {
-        this.trainingService.deletebyId(id);
-
+        this.trainingService.deleteById(id);
     }
 }
