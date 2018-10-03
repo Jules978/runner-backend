@@ -67,16 +67,16 @@ public class RunEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateRun(@PathVariable long id, @RequestBody Run runNew){
         if(this.runService.existsById(id)) {
-            this.runService.updateUnfinishedRun(runNew);
+            this.runService.updateUnfinishedRun(id, runNew);
         }
 
     }
 
-    @PutMapping("/api/run/finished/{id}")
+    @PutMapping("/api/run/finishrun/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void FinishRun(@PathVariable long id, @RequestBody Run runNew){
         if(this.runService.existsById(id)) {
-            this.runService.finishRun(runNew);
+            this.runService.finishRun(id, runNew);
         }
 
     }

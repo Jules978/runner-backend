@@ -60,8 +60,8 @@ public class RunService {
         return this.runRepository.existsById(id);
     }
 
-    public void updateUnfinishedRun(Run runNew){
-        Run runEdit = this.findById(runNew.getId());
+    public void updateUnfinishedRun(long id, Run runNew){
+        Run runEdit = this.findById(id);
         runEdit.setDistance(runNew.getDistance());
 
         runEdit.setComment(runNew.getComment());
@@ -71,8 +71,10 @@ public class RunService {
 
     }
 
-    public void finishRun(Run runNew){
-        Run runEdit = this.findById(runNew.getId());
+    public void finishRun(long id, Run runNew){
+        Run runEdit = this.findById(id);
+        System.out.println(runNew);
+        System.out.println(runEdit);
         runEdit.setDistance(runNew.getDistance());
         runEdit.setTime(runNew.getTime());
 
@@ -81,7 +83,8 @@ public class RunService {
             runEdit.setAvspeed(pace);
         }
         runEdit.setComment(runNew.getComment());
-        runEdit.setTraining(runNew.getTraining());
+        runEdit.setFinished("yes");
+        runEdit.setScore(runNew.getScore());
 
         this.save(runEdit);
 
