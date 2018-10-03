@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -73,12 +74,10 @@ public class RunService {
 
     public void finishRun(long id, Run runNew){
         Run runEdit = this.findById(id);
-        System.out.println(runNew);
-        System.out.println(runEdit);
         runEdit.setDistance(runNew.getDistance());
-        runEdit.setTime(runNew.getTime());
 
         if(runNew.checkTimeAndDistance()) {
+            runEdit.setTime(runNew.getTime());
             double pace = runNew.getTime() / runNew.getDistance();
             runEdit.setAvspeed(pace);
         }
@@ -89,9 +88,9 @@ public class RunService {
         this.save(runEdit);
 
     }
+
     public void updateOverdue(){
         Date date = new Date();
-        String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
 
         List<Run> runs = this.runRepository.findAllOverdueRuns();
         for (Run r : runs)
