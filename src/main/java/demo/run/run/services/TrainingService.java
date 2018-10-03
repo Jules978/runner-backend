@@ -1,15 +1,21 @@
 package demo.run.run.services;
 
+import demo.run.run.entities.Run;
 import demo.run.run.entities.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
 public class TrainingService {
     @Autowired
     TrainingRepository trainingRepository;
+
+    @Autowired
+    RunService runservice;
 
     public Iterable<Training> giveAll(){
         return trainingRepository.findAll();
@@ -23,17 +29,25 @@ public class TrainingService {
         return trainingRepository.save(training);
     }
 
-    public void deletebyId(long id){
-        this.trainingRepository.deleteById(id);
+    public void deletebyId(long id) {
+        if (trainingRepository.existsById(id)) {
+            List<Run> runs = this.runservice.FindByTraining(id);
+            for (Run r : runs) {
+                r.setTraining(null);
+            }
+            this.trainingRepository.deleteById(id);
+        }
     }
 
     public void update(long id, Training trainingNew){
-        Training trainingEdit = this.findById(id);
-        trainingEdit.setName(trainingNew.getName());
-        trainingEdit.setDescription(trainingNew.getDescription());
-        trainingEdit.setType(trainingNew.getType());
+        if(trainingRepository.existsById(id)) {
 
-        this.save(trainingEdit);
+            Training trainingEdit = this.findById(id);
+            trainingEdit.setName(trainingNew.getName());
+            trainingEdit.setDescription(trainingNew.getDescription());
+            trainingEdit.setType(trainingNew.getType());
 
+            this.save(trainingEdit);
+        }
     }
 }

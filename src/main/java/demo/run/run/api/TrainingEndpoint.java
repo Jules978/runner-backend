@@ -62,4 +62,10 @@ public class TrainingEndpoint {
         System.out.println("Training in POST is null!");
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
+
+    @DeleteMapping("/api/training/delete/{id}")
+    public void deleteTraining(@PathVariable long id) {
+        this.trainingService.deletebyId(id);
+
+    }
 }
