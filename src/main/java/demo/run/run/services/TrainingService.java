@@ -26,4 +26,14 @@ public class TrainingService {
     public void deletebyId(long id){
         this.trainingRepository.deleteById(id);
     }
+
+    public void update(long id, Training trainingNew){
+        Training trainingEdit = this.findById(id);
+        trainingEdit.setName(trainingNew.getName());
+        trainingEdit.setDescription(trainingNew.getDescription());
+        trainingEdit.setType(trainingNew.getType());
+
+        this.save(trainingEdit);
+
+    }
 }

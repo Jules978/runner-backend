@@ -43,10 +43,18 @@ public class TrainingEndpoint {
         return runs;
     }
 
+    @PutMapping("/api/training/update/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateTraining(@PathVariable long id, @RequestBody Training trainingNew){
+        if(trainingNew != null){
+            this.trainingService.update(id, trainingNew);
+        }
+    }
+
     @PostMapping("/api/training/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response postStudent(@RequestBody Training training){
+    public Response addTraining(@RequestBody Training training){
         if(training != null){
             Training result = this.trainingService.save(training);
             return Response.accepted(result.getId()).build();
