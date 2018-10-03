@@ -1,12 +1,11 @@
 package demo.run.run.api;
+
 import demo.run.run.entities.Run;
 import demo.run.run.services.RunService;
 import demo.run.run.entities.Training;
 import demo.run.run.services.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

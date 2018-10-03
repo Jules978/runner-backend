@@ -4,7 +4,6 @@ import demo.run.run.entities.Run;
 import demo.run.run.services.RunService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
