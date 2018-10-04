@@ -60,6 +60,7 @@ public class RunService {
 
     public void updateUnfinishedRun(long id, Run runNew){
         Run runEdit = this.findById(id);
+        runEdit.setTitle(runNew.getTitle());
         runEdit.setDistance(runNew.getDistance());
         runEdit.setComment(runNew.getComment());
         runEdit.setTraining(runNew.getTraining());
@@ -75,6 +76,7 @@ public class RunService {
             runEdit.setAvspeed(pace);
         }
         runEdit.setComment(runNew.getComment());
+        runEdit.setTitle(runNew.getTitle());
         runEdit.setFinished("yes");
         runEdit.setScore(runNew.getScore());
         this.save(runEdit);
@@ -88,7 +90,7 @@ public class RunService {
         {
             Date runDate = r.getDate();
             if (runDate.before(date)){
-                r.setOverdue("yes");
+                r.setOverdue("overdueRun");
             }
         }
     }

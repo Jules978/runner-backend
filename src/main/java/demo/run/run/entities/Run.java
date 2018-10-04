@@ -13,14 +13,23 @@ public class Run {
     @Temporal(TemporalType.DATE)
     Date date;
     private double distance;
+    private String title;
     private Double time;
-    private Integer score;
     private Double avspeed;
+    private Integer score;
     private String overdue;
     private String finished;
     private String comment;
     @ManyToOne
     private Training training;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Training getTraining() {
         return training;
