@@ -22,21 +22,21 @@ public class RunEndpoint {
         Iterable<Run> runs = this.runService.giveAll();
         return runs;
     }
-
-    @GetMapping("/api/run/sortbydate")
+    //all runs sorted by date descending
+    @GetMapping("/api/run/allsortbydate")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Run> showAllSorted() {
         List<Run> runs = this.runService.giveAllSorted();
         return runs;
     }
-
+    //all unfinished runs, sorted by date ascending
     @GetMapping("/api/run/unfinished")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Run> showUnfinished() {
        return this.runService.giveUnfinished();
     }
 
-    @GetMapping("/api/runs/overdue")
+    @GetMapping("/api/run/overdue")
     @Produces(MediaType.APPLICATION_JSON)
     public void updateOverdue() {
         this.runService.updateOverdue();

@@ -25,7 +25,7 @@ public class RunService {
         Collections.sort(runs, new Comparator<Run>() {
             @Override
             public int compare(Run o1, Run o2) {
-                return o1.getDate().compareTo(o2.getDate());
+                return o2.getDate().compareTo(o1.getDate());
             }
         });
         return runs;
@@ -82,15 +82,17 @@ public class RunService {
         this.save(runEdit);
     }
 
-    public void updateOverdue(){
+    public void updateOverdue() {
         Date date = new Date();
 
         List<Run> runs = this.runRepository.findAllNotOverdueRuns();
-        for (Run r : runs)
-        {
+        for (Run r : runs) {
             Date runDate = r.getDate();
-            if (runDate.before(date)){
+            if (runDate.before(date) && r.getFinished().equals("no")) {
+
                 r.setOverdue("overdueRun");
+            } else {
+                r.setOverdue("no");
             }
         }
     }
