@@ -85,7 +85,7 @@ public class RunService {
     public void updateOverdue(){
         Date date = new Date();
 
-        List<Run> runs = this.runRepository.findAllOverdueRuns();
+        List<Run> runs = this.runRepository.findAllNotOverdueRuns();
         for (Run r : runs)
         {
             Date runDate = r.getDate();

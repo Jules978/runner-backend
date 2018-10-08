@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface RunRepository extends CrudRepository<Run, Long> {
     @Query("SELECT r FROM Run r WHERE r.overdue = 'no'")
-    List<Run> findAllOverdueRuns();
+    List<Run> findAllNotOverdueRuns();
 
     @Query("SELECT r FROM Run r WHERE r.finished = 'no'")
     List<Run> findAllUnfinishedRuns();

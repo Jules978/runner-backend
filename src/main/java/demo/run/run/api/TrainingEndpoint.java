@@ -21,7 +21,7 @@ public class TrainingEndpoint {
     @Autowired
     RunService runService;
 
-    @GetMapping("/api/training")
+    @GetMapping("/api/training/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Iterable<Training> showAll() {
         Iterable<Training> trainings = this.trainingService.giveAll();

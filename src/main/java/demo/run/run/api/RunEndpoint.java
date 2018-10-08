@@ -16,7 +16,7 @@ public class RunEndpoint {
     @Autowired
     RunService runService;
 
-    @GetMapping("/api/run")
+    @GetMapping("/api/run/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Iterable<Run> showAll() {
         Iterable<Run> runs = this.runService.giveAll();
@@ -53,7 +53,7 @@ public class RunEndpoint {
     @PostMapping("/api/run/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response postStudent(@RequestBody Run run){
+    public Response addRun(@RequestBody Run run){
         if(run != null){
             Run result = this.runService.save(run);
             return Response.accepted(result.getId()).build();
