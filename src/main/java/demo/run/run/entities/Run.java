@@ -1,6 +1,8 @@
 package demo.run.run.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.DefaultValue;
 import java.util.Date;
 
 @Entity
@@ -10,16 +12,26 @@ public class Run {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Temporal(TemporalType.DATE)
     Date date;
+
     private double distance;
     private String title;
     private Double time;
     private Double avspeed;
     private Integer score;
+
+    @NotNull
+    @DefaultValue("no")
     private String overdue;
+
+    @NotNull
+    @DefaultValue("no")
     private String finished;
+
     private String comment;
+
     @ManyToOne
     private Training training;
 

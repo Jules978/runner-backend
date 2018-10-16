@@ -66,7 +66,7 @@ public class RunEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateRun(@PathVariable long id, @RequestBody Run runNew){
         if(this.runService.existsById(id)) {
-            this.runService.updateUnfinishedRun(id, runNew);
+            this.runService.updateRun(id, runNew);
         }
 
     }

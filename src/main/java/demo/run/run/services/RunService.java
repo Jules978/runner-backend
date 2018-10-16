@@ -58,12 +58,21 @@ public class RunService {
         return this.runRepository.existsById(id);
     }
 
-    public void updateUnfinishedRun(long id, Run runNew){
+    public void updateRun(long id, Run runNew){
         Run runEdit = this.findById(id);
         runEdit.setTitle(runNew.getTitle());
         runEdit.setDistance(runNew.getDistance());
         runEdit.setComment(runNew.getComment());
-        runEdit.setTraining(runNew.getTraining());
+        if(runNew.getTraining() != null){ runEdit.setTraining(runNew.getTraining());}
+
+        if(runNew.checkTimeAndDistance()) {
+            runEdit.setTime(runNew.getTime());
+            double pace = runNew.getTime() / runNew.getDistance();
+            runEdit.setAvspeed(pace);
+        }
+
+        if(runNew.getScore() != null){runEdit.setScore(runNew.getScore());}
+
         this.save(runEdit);
     }
 
