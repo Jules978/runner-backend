@@ -23,12 +23,8 @@ public class Run {
     private Integer score;
 
     @NotNull
-    @DefaultValue("no")
-    private String overdue;
-
-    @NotNull
-    @DefaultValue("no")
-    private String finished;
+    @DefaultValue("planned")
+    private String status;
 
     private String comment;
 
@@ -103,21 +99,12 @@ public class Run {
         this.avspeed = avspeed;
     }
 
-    public String getOverdue() {
-        return overdue;
+    public String getStatus() {
+        return status;
     }
 
-    public void setOverdue(String overdue) {
-        this.overdue = overdue;
-    }
-
-
-    public String getFinished() {
-        return finished;
-    }
-
-    public void setFinished(String finished) {
-        this.finished = finished;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public boolean checkTimeAndDistance(){

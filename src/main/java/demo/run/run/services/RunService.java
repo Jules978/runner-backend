@@ -86,7 +86,7 @@ public class RunService {
         }
         runEdit.setComment(runNew.getComment());
         runEdit.setTitle(runNew.getTitle());
-        runEdit.setFinished("yes");
+        runEdit.setStatus("finished");
         runEdit.setScore(runNew.getScore());
         this.save(runEdit);
     }
@@ -97,11 +97,9 @@ public class RunService {
         List<Run> runs = this.runRepository.findAllNotOverdueRuns();
         for (Run r : runs) {
             Date runDate = r.getDate();
-            if (runDate.before(date) && r.getFinished().equals("no")) {
+            if (runDate.before(date) && !r.getStatus().equals("finished")) {
 
-                r.setOverdue("overdueRun");
-            } else {
-                r.setOverdue("no");
+                r.setStatus("overdue");
             }
         }
     }
