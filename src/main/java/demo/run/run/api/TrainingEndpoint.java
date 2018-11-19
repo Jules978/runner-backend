@@ -1,10 +1,13 @@
 package demo.run.run.api;
 
 import demo.run.run.entities.Run;
+import demo.run.run.exception.EntityNotFoundException;
 import demo.run.run.services.RunService;
 import demo.run.run.entities.Training;
 import demo.run.run.services.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -23,47 +26,59 @@ public class TrainingEndpoint {
 
     @GetMapping("/api/training/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Iterable<Training> showAll() {
+    public ResponseEntity<Iterable<Training>> showAll() {
         Iterable<Training> trainings = this.trainingService.giveAll();
-        return trainings;
+        return new ResponseEntity(trainings, HttpStatus.OK);
     }
 
     @GetMapping("/api/training/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Training findTrainingById(@PathVariable long id) {
-        Training training = this.trainingService.findById(id);
-        return training;
+    public ResponseEntity<Training> findTrainingById(@PathVariable long id) {
+        if(this.trainingService.trainingExists(id)){
+            Training training = this.trainingService.findById(id);
+            return new ResponseEntity(training, HttpStatus.OK);
+        } else {
+            throw new EntityNotFoundException("Training not found.");
+        }
+
     }
 
     @GetMapping("/api/training/runs/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Run> findRunsinTraining(@PathVariable long id) {
+    public ResponseEntity<List<Run>> findRunsinTraining(@PathVariable long id) {
         List<Run> runs = this.runService.FindByTraining(id);
-        return runs;
+        return new ResponseEntity(runs, HttpStatus.OK);
     }
 
     @PutMapping("/api/training/update/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateTraining(@PathVariable long id, @RequestBody Training trainingNew){
-        if(trainingNew != null){
+    public ResponseEntity updateTraining(@PathVariable long id, @RequestBody Training trainingNew){
+        if(trainingNew != null && this.trainingService.trainingExists(trainingNew.getId())){
             this.trainingService.update(id, trainingNew);
+            return new ResponseEntity ("training updated.", HttpStatus.OK);
+        } else {
+            throw new EntityNotFoundException("Training not found, or no training given.");
         }
     }
 
     @PostMapping("/api/training/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public Response addTraining(@RequestBody Training training){
+    public ResponseEntity addTraining(@RequestBody Training training){
         if(training != null){
             Training result = this.trainingService.save(training);
-            return Response.accepted(result.getId()).build();
+            return new ResponseEntity("Training added successfully", HttpStatus.OK);
         }
-        System.out.println("Training in POST is null!");
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return new ResponseEntity("Could not add training.", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @DeleteMapping("/api/training/delete/{id}")
-    public void deleteTraining(@PathVariable long id) {
-        this.trainingService.deleteById(id);
+    public ResponseEntity deleteTraining(@PathVariable long id) {
+        if(this.trainingService.trainingExists(id)){
+            this.trainingService.deleteById(id);
+            return new ResponseEntity("Training deleted.",HttpStatus.OK);
+        } else {
+            throw new EntityNotFoundException("Training doesn't exist.");
+        }
     }
 }

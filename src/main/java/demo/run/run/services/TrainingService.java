@@ -47,4 +47,8 @@ public class TrainingService {
             this.save(trainingEdit);
         }
     }
+
+    public boolean trainingExists(long id) {
+        return this.trainingRepository.existsById(id);
+    }
 }
