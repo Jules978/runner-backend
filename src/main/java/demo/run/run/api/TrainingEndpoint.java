@@ -61,9 +61,9 @@ public class TrainingEndpoint {
     @PutMapping("/api/training/update/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public ResponseEntity updateTraining(@PathVariable long id, @RequestBody Training trainingNew) {
-        if (trainingNew != null && this.trainingService.trainingExists(trainingNew.getId())) {
+        if (trainingNew != null && this.trainingService.trainingExists(id)) {
             this.trainingService.update(id, trainingNew);
-            return new ResponseEntity("training updated.", HttpStatus.OK);
+            return new ResponseEntity(trainingService.findTrainingdetails(id), HttpStatus.OK);
         } else {
             throw new EntityNotFoundException("Training not found, or no training given.");
         }
