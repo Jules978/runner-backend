@@ -1,10 +1,13 @@
 package demo.run.run.services;
 
+import demo.run.run.ResponseObjects.TrainingDetailResponseObject;
 import demo.run.run.entities.Run;
 import demo.run.run.entities.Training;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,5 +53,41 @@ public class TrainingService {
 
     public boolean trainingExists(long id) {
         return this.trainingRepository.existsById(id);
+    }
+
+    public TrainingDetailResponseObject findTrainingdetails(long id) {
+        TrainingDetailResponseObject details = new TrainingDetailResponseObject();
+        List<Run> runs = this.runservice.FindByTraining(id);
+        Training training = this.findById(id);
+
+        runs.stream()
+                .forEach(p -> {
+                    details.addDistance(p.getDistance());
+                    details.addTime(p.getTime());
+                });
+
+        runs.stream()
+                .filter(p -> p.getStatus().equals("finished"))
+                .forEach(p -> {
+                    details.addFinishedDistance(p.getDistance());
+                    details.addFinishedTime(p.getTime());
+                    details.addFinishedRun();
+                });
+
+        details.setNumberOfRuns(runs.size());
+        details.setRuns(runs);
+        details.setDescription(training.getDescription());
+        details.setId(training.getId());
+        details.setName(training.getName());
+        details.setType(training.getType());
+        return details;
+    }
+    public List<TrainingDetailResponseObject> giveAllDetails(){
+        Iterable<Training> trainings = this.giveAll();
+        List<TrainingDetailResponseObject> trainingResponseObjects = new ArrayList<>();
+        for (Training t: trainings) {
+            trainingResponseObjects.add(this.findTrainingdetails(t.getId()));
+        }
+        return trainingResponseObjects;
     }
 }
